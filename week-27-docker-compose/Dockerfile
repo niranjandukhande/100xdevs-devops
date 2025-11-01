@@ -9,11 +9,10 @@ RUN npm install
 
 COPY . .
 
-ENV DATABASE_URL = postgresql://postgres:mysecretpassword@localhost:5432/postgres
+ENV DATABASE_URL=postgresql://postgres:mysecretpassword@localhost:5432/postgres
 
-RUN npx prisma migrate dev
-RUN npx prisma generate
+RUN DATABASE_URL=$DATABASE_URL npx prisma migrate dev 
 
 RUN npm run build
 
-CMD ["npm", "start"]
+CMD ["npm","run", "start"]
